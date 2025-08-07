@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Zaza - Luxury Retreat in Nosara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use Inter for body text and Playfair Display for headings for an elegant feel */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* A deep, dark blue-gray */
+            color: #e2e8f0; /* A soft, off-white */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-gold {
+            color: #d69e2e; /* A rich, warm gold for accents */
+        }
+        .bg-gold {
+            background-color: #d69e2e;
+        }
+        /* Style for the gallery image hover effect */
+        .gallery-item img {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        /* Styles for the full-screen modal */
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="absolute top-0 left-0 right-0 z-10 p-6 md:p-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wider text-white drop-shadow-md">Casa Zaza</h1>
+            <a href="#contact" class="hidden md:inline-block bg-gold text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Inquire Now</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center text-center text-white">
+        <div class="absolute inset-0 bg-black opacity-70"></div>
+        <img src="https://i.imgur.com/lZuJUM2.jpeg" 
+             onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/1a202c/e2e8f0?text=Villa+Exterior';"
+             alt="Stunning modern villa with a pool at dusk" class="absolute inset-0 w-full h-full object-cover">
+        <div class="relative z-10 bg-gray-900/75 p-8 rounded-lg shadow-2xl max-w-4xl mx-4">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">Casa Zaza Nosara</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto">Completed in 2024, this luxurious 6-bedroom villa offers the perfect combination of modern design and natural beauty, just a 5-minute walk from Pelada Beach.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 md:p-12">
+        
+        <!-- Introduction Section -->
+        <section class="text-center my-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">An Unforgettable Costa Rican Escape</h2>
+            <p class="max-w-4xl mx-auto text-lg text-gray-400 leading-relaxed">
+                Welcome to Casa Zaza, your tropical gated multi-family retreat! With 4 bedrooms in the main house and 2 additional independent studio suites, our villa comfortably accommodates up to 12 guests. Enjoy the amazing 10-meter saltwater pool, lush gardens, and easy access to the beach via the famous Monkey Trail. It's the ideal sanctuary for families, friends, or anyone seeking a peaceful yet adventurous escape.
+            </p>
+        </section>
+
+        <!-- Divider -->
+        <div class="w-24 h-px bg-gold mx-auto my-16"></div>
+
+        <!-- Photo Gallery Section -->
+        <section id="gallery" class="my-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Explore Casa Zaza</h2>
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <!-- Gallery images will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="w-24 h-px bg-gold mx-auto my-16"></div>
+        
+        <!-- Amenities Section -->
+        <section class="my-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Luxury Amenities</h2>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Private Saltwater Pool</h3>
+                    <p class="text-gray-400">Relax by your private 10-meter long, saltwater pool, surrounded by tropical greenery.</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Gourmet Kitchen</h3>
+                    <p class="text-gray-400">A spacious kitchen with state-of-the-art appliances, marble-topped island, and a reverse osmosis water filtration system.</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Flexible Accommodations</h3>
+                    <p class="text-gray-400">A 4-bedroom main house plus two private studio suites, perfect for large groups or multiple families.</p>
+                </div>
+                 <div class="p-6 md:col-span-3">
+                    <h3 class="text-2xl font-bold text-gold mb-3">And Much More...</h3>
+                    <p class="text-gray-400">Heated bidet seats, dual laundry facilities, safety deposit boxes, three baby cribs, garage parking, and a backup generator for uninterrupted comfort.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact/Booking Section -->
+        <section id="contact" class="text-center my-24 py-16 bg-gray-800 rounded-lg">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Reserve Your Stay</h2>
+            <div class="max-w-3xl mx-auto text-lg text-gray-400 mb-8">
+                <h4 class="text-2xl font-bold text-gold mb-4">Seasonal Rates</h4>
+                <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-left mx-auto max-w-md">
+                    <span class="font-semibold">High Season:</span><span>$785/night | $5500/week</span>
+                    <span class="font-semibold">Low Season:</span><span>$600/night | $4200/week</span>
+                    <span class="font-semibold">Green Season:</span><span>$500/night | $3500/week</span>
+                    <span class="font-semibold">Easter/Thanksgiving:</span><span>$600/night | $5500/week</span>
+                    <span class="font-semibold">Holidays:</span><span>$1300/night | $9100/week</span>
+                </div>
+                <p class="text-sm mt-4">+ 13% VAT, Cleaning Fee, and Security Deposit apply.</p>
+            </div>
+            <a href="mailto:zaza.jackman@gmail.com" class="bg-gold text-gray-900 font-bold py-4 px-10 rounded-lg text-lg hover:bg-yellow-600 transition-colors duration-300">
+                Inquire for Availability
+            </a>
+        </section>
+
+        <!-- Guest Information Section -->
+        <section class="my-16">
+             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Important Guest Information</h2>
+             <div class="max-w-4xl mx-auto space-y-8 text-gray-400">
+                 <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Property Management & Concierge</h4>
+                     <p>Our property manager is available to assist you daily. This listing includes complimentary concierge services to help curate your perfect Costa Rican experience, from booking surf lessons and ATV tours to arranging rental cars, private chefs, and massages.</p>
+                 </div>
+                 <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Security</h4>
+                     <p>Nosara is a wonderful community. However, like any tourist area, petty theft can occur. We advise guests to be mindful of their belongings. The guest is responsible for securing valuables and ensuring all security features are enabled when leaving the property.</p>
+                 </div>
+                 <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Jungle Creatures</h4>
+                     <p>Welcome to the jungle! While we make every effort to present a well-cleaned home, nature is all around us. You can expect to see ants, beetles, spiders, and other insects. To minimize their presence, please keep food wrapped and stored, and screen doors closed.</p>
+                 </div>
+                  <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Refunds & Insurance</h4>
+                     <p>No refunds will be given for natural disasters, utility outages, security breaches, or nearby construction noise. We strongly encourage all guests to purchase Traveler Insurance to protect against unforeseen circumstances.</p>
+                 </div>
+             </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center p-8 border-t border-gray-700">
+        <p class="text-gray-500">&copy; 2024 Casa Zaza. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Full-screen Image Modal -->
+    <div id="image-modal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <span id="close-modal" class="absolute top-6 right-8 text-white text-5xl font-bold cursor-pointer hover:text-gold">&times;</span>
+        <img id="modal-image" src="" alt="Full-screen view of gallery image" class="modal-content object-contain rounded-lg shadow-2xl">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeModalBtn = document.getElementById('close-modal');
+
+            // --- Gallery Images Data ---
+            const images = [
+                { src: 'https://i.imgur.com/8dGYWzl.jpeg?q=80&w=2532&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/XIrbGUC.jpeg?q=80&w=2670&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/ZpPeGvT.jpeg?q=80&w=2670&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/uBC7Sja.jpeg?q=80&w=2574&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/uFgUH32.jpeg?q=80&w=2594&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/TqMEQTn.jpeg?q=80&w=2532&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/MstU00H.jpeg?q=80&w=2670&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/IeQqkQu.jpeg?q=80&w=2670&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/z7CejSP.jpeg?q=80&w=2574&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/Pa6Pryz.jpeg?q=80&w=2594&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/e7pkzyD.jpeg?q=80&w=2594&auto=format&fit=crop', alt: '' },
+                { src: 'https://i.imgur.com/1RM3BLf.jpeg?q=80&w=2574&auto=format&fit=crop', alt: '' }
+            ];
+
+            // --- Populate Gallery ---
+            images.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item cursor-pointer overflow-hidden rounded-lg shadow-lg';
+                
+                const imgElement = document.createElement('img');
+                imgElement.src = image.src;
+                imgElement.alt = image.alt;
+                imgElement.className = 'w-full h-full object-cover aspect-square';
+                imgElement.onerror = function() {
+                    this.onerror=null;
+                    this.src='https://placehold.co/600x600/1a202c/e2e8f0?text=Image+Not+Found';
+                };
+
+                galleryItem.appendChild(imgElement);
+                galleryGrid.appendChild(galleryItem);
+
+                galleryItem.addEventListener('click', () => openModal(image.src));
+            });
+
+            // --- Modal Functionality ---
+            function openModal(src) {
+                modalImage.src = src;
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalImage.classList.add('transform', 'scale-100');
+                }, 10);
+            }
+
+            function closeModal() {
+                modal.classList.add('opacity-0');
+                modalImage.classList.remove('transform', 'scale-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+
+            // --- Event Listeners ---
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
