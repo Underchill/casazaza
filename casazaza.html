@@ -39,6 +39,14 @@
             max-width: 90vw;
             max-height: 90vh;
         }
+        /* Hide gallery items beyond the 6th by default within any gallery grid */
+        .gallery-grid .gallery-item:nth-child(n+7) {
+            display: none;
+        }
+        /* Class to show all items when a gallery is expanded */
+        .gallery-grid.gallery-expanded .gallery-item {
+            display: block;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -78,27 +86,51 @@
         <!-- Divider -->
         <div class="w-24 h-px bg-gold mx-auto my-16"></div>
 
+        <!-- Professional Photo Gallery Section -->
+        <section id="professional-gallery-section" class="my-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Professional Photos</h2>
+            <div id="professional-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <!-- Professional photos will be injected here -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="show-more-btn-professional" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                <button id="show-less-btn-professional" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+            </div>
+        </section>
+        
         <!-- Inside the House Gallery -->
-        <section id="gallery-inside-section" class="my-16">
+        <section id="inside-gallery-section" class="my-16">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Inside the House</h2>
-            <div id="gallery-inside" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <!-- Inside images will be injected here -->
+            <div id="inside-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <!-- Inside photos will be injected here -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="show-more-btn-inside" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                <button id="show-less-btn-inside" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
         <!-- Outside the House Gallery -->
-        <section id="gallery-outside-section" class="my-16">
+        <section id="outside-gallery-section" class="my-16">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Outside the House</h2>
-            <div id="gallery-outside" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <!-- Outside images will be injected here -->
+            <div id="outside-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <!-- Outside photos will be injected here -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="show-more-btn-outside" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                <button id="show-less-btn-outside" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
         <!-- Nature Gallery -->
-        <section id="gallery-nature-section" class="my-16">
+        <section id="nature-gallery-section" class="my-16">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Surrounding Nature</h2>
-            <div id="gallery-nature" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <!-- Nature images will be injected here -->
+            <div id="nature-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <!-- Nature photos will be injected here -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="show-more-btn-nature" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                <button id="show-less-btn-nature" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
@@ -190,6 +222,18 @@
             const closeModalBtn = document.getElementById('close-modal');
 
             // --- Gallery Image Data ---
+            const professionalImages = [
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/2hl7r5dwv/midres/9E2A3829-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/53d5z61ho/midres/9E2A3856-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/ujtxdgjk3/midres/9E2A3676-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/6znkdej5w/midres/9E2A3463-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/7aoyyabsm/midres/9E2A3468-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/2x5jbntb3/midres/9E2A3478-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/bvi2ky5n4/midres/9E2A3487-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/55b9jzuf3/midres/9E2A3496-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/dm2458gcq/midres/9E2A3514-HDR.jpg', alt: 'Professional photo of Casa Zaza' }
+            ];
+            
             const insideImages = [
                 { src: 'https://i.imgur.com/EEhf9IZ.jpeg', alt: 'Interior of Casa Zaza' },
                 { src: 'https://i.imgur.com/GwVe4AC.jpeg', alt: 'Interior of Casa Zaza' },
@@ -208,38 +252,7 @@
                 { src: 'https://i.imgur.com/25MKodL.jpeg', alt: 'Exterior of Casa Zaza' },
                 { src: 'https://i.imgur.com/50sOhl2.jpeg', alt: 'Exterior of Casa Zaza' },
                 { src: 'https://i.imgur.com/KvaLYEi.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/apZn3uh.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/hR0ImSu.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/OaAXjKK.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/RQF4akY.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/e7pkzyD.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/1RM3BLf.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/Pa6Pryz.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/z7CejSP.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/IeQqkQu.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/MstU00H.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/TqMEQTn.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/AYkfpBH.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/0OS2hNc.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/uFgUH32.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/uBC7Sja.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/ZpPeGvT.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/XIrbGUC.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/8dGYWzl.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/PILXb73.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/VO5z0DB.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/t0Hu9kq.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/BRL4ehA.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/n28KqzM.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/aDvNtUf.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/3oMpU9K.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/QTTlB3r.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/cOhELqn.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/MtKDpSc.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/a83X8Gd.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/gxy4r8F.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/ayJWwRx.jpeg', alt: 'Exterior of Casa Zaza' },
-                { src: 'https://i.imgur.com/F2GEUyT.jpeg', alt: 'Exterior of Casa Zaza' }
+                { src: 'https://i.imgur.com/apZn3uh.jpeg', alt: 'Exterior of Casa Zaza' }
             ];
 
             const natureImages = [
@@ -249,20 +262,12 @@
                 { src: 'https://i.imgur.com/WYb1Uub.jpeg', alt: 'Nature around Casa Zaza' },
                 { src: 'https://i.imgur.com/4HnWnCd.jpeg', alt: 'Nature around Casa Zaza' },
                 { src: 'https://i.imgur.com/knd7jGC.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/F0S1hKx.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/DTw4vq9.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/I5Dpxfz.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/Y8GZ105.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/aGjujVO.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/p7MXXWi.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/1Jlr8r3.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/J4pDnli.jpeg', alt: 'Nature around Casa Zaza' }
+                { src: 'https://i.imgur.com/F0S1hKx.jpeg', alt: 'Nature around Casa Zaza' }
             ];
 
-            // --- Reusable Function to Populate Galleries ---
-            function populateGallery(galleryId, images) {
-                const galleryGrid = document.getElementById(galleryId);
-                if (!galleryGrid) return;
+            // --- Reusable Function to Populate a Gallery ---
+            function populateGallery(galleryElement, images) {
+                if (!galleryElement) return;
 
                 images.forEach(image => {
                     const galleryItem = document.createElement('div');
@@ -271,23 +276,54 @@
                     const imgElement = document.createElement('img');
                     imgElement.src = image.src;
                     imgElement.alt = image.alt;
-                    imgElement.className = 'w-full h-full object-cover aspect-video'; // Use aspect-video for a wider shot
+                    imgElement.className = 'w-full h-full object-cover aspect-video';
                     imgElement.onerror = function() {
                         this.onerror=null;
                         this.src='https://placehold.co/800x450/1a202c/e2e8f0?text=Image+Not+Found';
                     };
 
                     galleryItem.appendChild(imgElement);
-                    galleryGrid.appendChild(galleryItem);
+                    galleryElement.appendChild(galleryItem);
 
                     galleryItem.addEventListener('click', () => openModal(image.src));
                 });
             }
             
-            // --- Populate All Galleries ---
-            populateGallery('gallery-inside', insideImages);
-            populateGallery('gallery-outside', outsideImages);
-            populateGallery('gallery-nature', natureImages);
+            // --- Setup function for expandable galleries ---
+            function setupExpandableGallery(galleryId, showMoreBtnId, showLessBtnId, sectionId, images) {
+                const gallery = document.getElementById(galleryId);
+                const showMoreBtn = document.getElementById(showMoreBtnId);
+                const showLessBtn = document.getElementById(showLessBtnId);
+
+                if (!gallery || !showMoreBtn || !showLessBtn) return;
+                
+                // Hide buttons if there are 6 or fewer images
+                if (images.length <= 6) {
+                    showMoreBtn.style.display = 'none';
+                    showLessBtn.style.display = 'none';
+                }
+
+                populateGallery(gallery, images);
+
+                showMoreBtn.addEventListener('click', () => {
+                    gallery.classList.add('gallery-expanded');
+                    showMoreBtn.classList.add('hidden');
+                    showLessBtn.classList.remove('hidden');
+                });
+
+                showLessBtn.addEventListener('click', () => {
+                    gallery.classList.remove('gallery-expanded');
+                    showMoreBtn.classList.remove('hidden');
+                    showLessBtn.classList.add('hidden');
+                    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // --- Initialize all galleries ---
+            setupExpandableGallery('professional-gallery', 'show-more-btn-professional', 'show-less-btn-professional', 'professional-gallery-section', professionalImages);
+            setupExpandableGallery('inside-gallery', 'show-more-btn-inside', 'show-less-btn-inside', 'inside-gallery-section', insideImages);
+            setupExpandableGallery('outside-gallery', 'show-more-btn-outside', 'show-less-btn-outside', 'outside-gallery-section', outsideImages);
+            setupExpandableGallery('nature-gallery', 'show-more-btn-nature', 'show-less-btn-nature', 'nature-gallery-section', natureImages);
 
 
             // --- Modal Functionality ---
