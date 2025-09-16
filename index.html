@@ -224,8 +224,22 @@
 
     <!-- Full-screen Image Modal -->
     <div id="image-modal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden opacity-0">
-        <span id="close-modal" class="absolute top-6 right-8 text-white text-5xl font-bold cursor-pointer hover:text-gold">&times;</span>
-        <img id="modal-image" src="" alt="Full-screen view of gallery image" class="modal-content object-contain rounded-lg shadow-2xl">
+        <span id="close-modal" class="absolute top-6 right-8 text-white text-5xl font-bold cursor-pointer hover:text-gold z-20">&times;</span>
+        
+        <!-- Prev/Next Arrows -->
+        <button id="prev-btn" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 transition-colors z-20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <img id="modal-image" src="" alt="Full-screen view of gallery image" class="modal-content object-contain rounded-lg shadow-2xl cursor-pointer">
+        
+        <button id="next-btn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 transition-colors z-20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
     </div>
 
     <script>
@@ -233,6 +247,11 @@
             const modal = document.getElementById('image-modal');
             const modalImage = document.getElementById('modal-image');
             const closeModalBtn = document.getElementById('close-modal');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            let currentImageIndex = 0;
+            let activeImageList = [];
 
             // --- Gallery Image Data ---
             const professionalImages = [
@@ -333,7 +352,7 @@
             function populateGallery(galleryElement, images) {
                 if (!galleryElement) return;
 
-                images.forEach(image => {
+                images.forEach((image, index) => {
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item cursor-pointer overflow-hidden rounded-lg shadow-lg';
                     
@@ -349,7 +368,7 @@
                     galleryItem.appendChild(imgElement);
                     galleryElement.appendChild(galleryItem);
 
-                    galleryItem.addEventListener('click', () => openModal(image.src));
+                    galleryItem.addEventListener('click', () => openModal(images, index));
                 });
             }
             
@@ -392,33 +411,74 @@
 
 
             // --- Modal Functionality ---
-            function openModal(src) {
-                modalImage.src = src;
+            function showImage(index) {
+                if (index >= activeImageList.length) {
+                    currentImageIndex = 0;
+                } else if (index < 0) {
+                    currentImageIndex = activeImageList.length - 1;
+                } else {
+                    currentImageIndex = index;
+                }
+                modalImage.src = activeImageList[currentImageIndex].src;
+            }
+
+            function showNextImage() {
+                showImage(currentImageIndex + 1);
+            }
+
+            function showPrevImage() {
+                showImage(currentImageIndex - 1);
+            }
+
+            function openModal(imageList, index) {
+                activeImageList = imageList;
+                showImage(index);
                 modal.classList.remove('hidden');
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
-                    modalImage.classList.add('transform', 'scale-100');
                 }, 10);
             }
 
             function closeModal() {
                 modal.classList.add('opacity-0');
-                modalImage.classList.remove('transform', 'scale-100');
                 setTimeout(() => {
                     modal.classList.add('hidden');
+                    activeImageList = []; // Clear active list
                 }, 300);
             }
 
             // --- Event Listeners ---
             closeModalBtn.addEventListener('click', closeModal);
+            modalImage.addEventListener('click', closeModal); // NEW: Click image to close
+
+            // Close modal if background is clicked
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     closeModal();
                 }
             });
+
+            // Arrow button navigation
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent modal background click
+                showPrevImage();
+            });
+
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent modal background click
+                showNextImage();
+            });
+
+            // Keyboard navigation
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                if (modal.classList.contains('hidden')) return; // Do nothing if modal is hidden
+
+                if (e.key === 'Escape') {
                     closeModal();
+                } else if (e.key === 'ArrowRight') {
+                    showNextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    showPrevImage();
                 }
             });
         });
@@ -426,5 +486,3 @@
 
 </body>
 </html>
-
-
