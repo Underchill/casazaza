@@ -337,10 +337,28 @@
                 { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/blteyjf80/midres/0R6A0434.jpg', alt: 'Professional photo of Casa Zaza' }
             ];
 
-            const activitiesGalley = [
-                { src: 'https://i.imgur.com/knd7jGC.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/F0S1hKx.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/N0WV9PC.jpeg', alt: 'Nature around Casa Zaza' },
+            const activitiesGallery = [
+                { 
+                    src: 'https://i.imgur.com/knd7jGC.jpeg', 
+                    alt: 'Fishing Nosara',
+                    title: 'Sport Fishing',
+                    description: 'The Best Sportfishing in Costa Rica',
+                    link: 'https://www.fishingnosara.com/' 
+                },
+                { 
+                    src: 'https://www.experience-nosara.com/wp-content/uploads/2019/10/stand-up-paddle-nosara-sup-costa-rica-ocean-lesson-029.gif', 
+                    alt: 'Open Ocean Sup Or Kayak Tour',
+                    title: 'Open Ocean Sup Or Kayak Tour',
+                    description: 'Professional Kayak or Paddle Boarding Tours',
+                    link: 'https://www.experience-nosara.com/tours/open-ocean-sup-or-kayak-tour/'
+                },
+                { 
+                    src: 'https://i.imgur.com/N0WV9PC.jpeg', 
+                    alt: 'Nature tours with Gabriela',
+                    title: 'Nature Tour',
+                    description: 'Hiking, Kayak and Horse Riding in Nosara, english, german and spanish',
+                    link: 'https://www.naturetoursgabriela.com/433581537
+                },
 
             ];
 
@@ -363,27 +381,47 @@
                 { src: 'https://i.imgur.com/J4pDnli.jpeg', alt: 'Nature around Casa Zaza' }
             ];
 
-            // --- Reusable Function to Populate a Gallery ---
             function populateGallery(galleryElement, images) {
                 if (!galleryElement) return;
 
                 images.forEach((image, index) => {
-                    const galleryItem = document.createElement('div');
-                    galleryItem.className = 'gallery-item cursor-pointer overflow-hidden rounded-lg shadow-lg';
-                    
-                    const imgElement = document.createElement('img');
-                    imgElement.src = image.src;
-                    imgElement.alt = image.alt;
-                    imgElement.className = 'w-full h-full object-cover aspect-video';
-                    imgElement.onerror = function() {
-                        this.onerror=null;
-                        this.src='https://placehold.co/800x450/1a202c/e2e8f0?text=Image+Not+Found';
-                    };
+                    // Check if we are populating the activities gallery
+                    if (galleryElement.id === 'activities-gallery') {
+                        // Create the new activity card with a link
+                        const card = document.createElement('div');
+                        card.className = 'flex flex-col bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300';
+                        
+                        card.innerHTML = `
+                            <img src="${image.src}" alt="${image.alt}" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h3 class="text-2xl font-bold text-gold mb-3">${image.title}</h3>
+                                <p class="text-gray-400 leading-relaxed mb-4 flex-grow">${image.description}</p>
+                                <a href="${image.link}" target="_blank" rel="noopener noreferrer" class="inline-block text-center bg-gold text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-yellow-600 transition-colors duration-300 mt-auto">
+                                    Learn More
+                                </a>
+                            </div>
+                        `;
+                        galleryElement.appendChild(card);
 
-                    galleryItem.appendChild(imgElement);
-                    galleryElement.appendChild(galleryItem);
+                    } else {
+                        // Original logic for all other galleries (image-only items)
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'gallery-item cursor-pointer overflow-hidden rounded-lg shadow-lg';
+                        
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image.src;
+                        imgElement.alt = image.alt;
+                        imgElement.className = 'w-full h-full object-cover aspect-video';
+                        imgElement.onerror = function() {
+                            this.onerror=null;
+                            this.src='https://placehold.co/800x450/1a202c/e2e8f0?text=Image+Not+Found';
+                        };
 
-                    galleryItem.addEventListener('click', () => openModal(images, index));
+                        galleryItem.appendChild(imgElement);
+                        galleryElement.appendChild(galleryItem);
+
+                        galleryItem.addEventListener('click', () => openModal(images, index));
+                    }
                 });
             }
             
@@ -501,3 +539,4 @@
 
 </body>
 </html>
+
