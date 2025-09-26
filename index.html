@@ -52,6 +52,13 @@
         .gallery-grid.gallery-expanded .gallery-item {
             display: block;
         }
+        .sticky-button {
+            position: fixed;
+            bottom: 1.5rem; /* 24px */
+            left: 50%;      /* Move the left edge to the center */
+            z-index: 40; /* Keeps it above page content but below the image modal */
+            transform: translateX(-50%); /* Shift the button left by half its own width */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -98,7 +105,7 @@
             </div>
             <div class="text-center mt-8">
                 <button id="show-more-btn-professional" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
-                <button id="show-less-btn-professional" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                <button id="show-less-btn-professional" class="show-less-btn hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
@@ -110,7 +117,7 @@
             </div>
             <div class="text-center mt-8">
                 <button id="show-more-btn-studio" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
-                <button id="show-less-btn-studio" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                <button id="show-less-btn-studio" class="show-less-btn hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
@@ -122,7 +129,7 @@
             </div>
             <div class="text-center mt-8">
                 <button id="show-more-btn-food" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
-                <button id="show-less-btn-food" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                <button id="show-less-btn-food" class="show-less-btn hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
@@ -134,7 +141,7 @@
             </div>
             <div class="text-center mt-8">
                 <button id="show-more-btn-activities" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
-                <button id="show-less-btn-activities" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                <button id="show-less-btn-activities" class="show-less-btn hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
@@ -146,7 +153,7 @@
             </div>
             <div class="text-center mt-8">
                 <button id="show-more-btn-nature" class="show-more-btn bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
-                <button id="show-less-btn-nature" class="show-less-btn hidden bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                <button id="show-less-btn-nature" class="show-less-btn hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
             </div>
         </section>
 
@@ -387,17 +394,17 @@
                 },
                 { 
                     src: 'https://i.imgur.com/erIK2XY.png', 
-                    alt: '506 Tennis Center',
-                    title: '506 Tennis Center',
+                    alt: 'Nexus Yoga Institute of Nosara',
+                    title: 'Nexus Yoga Institute of Nosara',
                     description: '5 Full size tennis courts',
-                    link: 'https://506tenniscenter.com/tennis-facility/' 
+                    link: 'https://www.nexusyoga.com/' 
                 },
                 { 
                     src: 'https://i.imgur.com/eU3IlyE.png', 
                     alt: 'Hike through the jungle of Nosara',
                     title: 'Hike through the jungle of Nosara',
                     description: 'The sun rises over the Nosara Biological Reserve, over 90 acres of 300-year-old mangroves, intertwined with Panama tree leaves dripping morning dew on the soil below',
-                    link: 'hhttps://www.costarica.com/attractions/nosara-biological-reserve'
+                    link: 'https://www.costarica.com/attractions/nosara-biological-reserve'
                 },
                 { 
                     src: 'https://i.imgur.com/le57P9C.png', 
@@ -480,7 +487,6 @@
 
                 if (!gallery || !showMoreBtn || !showLessBtn) return;
                 
-                // Hide buttons if there are 6 or fewer images
                 if (images.length <= 6) {
                     showMoreBtn.style.display = 'none';
                     showLessBtn.style.display = 'none';
@@ -492,12 +498,16 @@
                     gallery.classList.add('gallery-expanded');
                     showMoreBtn.classList.add('hidden');
                     showLessBtn.classList.remove('hidden');
+                    // NEW: Add the sticky class to the "Show Less" button
+                    showLessBtn.classList.add('sticky-button'); 
                 });
 
                 showLessBtn.addEventListener('click', () => {
                     gallery.classList.remove('gallery-expanded');
                     showMoreBtn.classList.remove('hidden');
                     showLessBtn.classList.add('hidden');
+                    // NEW: Remove the sticky class when collapsing
+                    showLessBtn.classList.remove('sticky-button'); 
                     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
                 });
             }
