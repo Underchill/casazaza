@@ -39,9 +39,14 @@
             max-width: 90vw;
             max-height: 90vh;
         }
-        /* Hide gallery items beyond the 6th by default within any gallery grid */
         .gallery-grid .gallery-item:nth-child(n+7) {
             display: none;
+        }
+        #activities-gallery > div:nth-child(n+7) {
+            display: none;
+        }
+        #activities-gallery.gallery-expanded > div {
+            display: flex; /* Use flex instead of block to maintain card layout */
         }
         /* Class to show all items when a gallery is expanded */
         .gallery-grid.gallery-expanded .gallery-item {
@@ -367,18 +372,39 @@
                     link: 'https://506tenniscenter.com/tennis-facility/' 
                 },
                 { 
-                    src: 'https://nosaraindependentsurf.com/img/x--20/y-331/w-1440/h-650/ww-540/wh-244/u/274346/277395/IMG_9243_9c0f7.png', 
+                    src: 'https://i.imgur.com/LmWFwiy.png', 
                     alt: 'NOSARA Independent Surf',
                     title: 'NOSARA Independent Surf',
                     description: 'Join Costa Rica Top Surfing School',
                     link: 'https://nosaraindependentsurf.com/home'
                 },
                 { 
-                    src: 'https://monkeyquads.com/wp-content/themes/monkey-quads-2014/library/images/Mala-Noche-Waterfall-Tour-Thumb.jpg', 
+                    src: 'https://i.imgur.com/GVeKR8Z.png', 
                     alt: 'Mala Noche Waterfall Tour',
                     title: 'Mala Noche Waterfall Tour',
                     description: 'Visit one of Mother Nature’s most amazing creations in the heart of the jungle',
                     link: 'https://monkeyquads.com/tours/mala-noche-waterfall-tour/'
+                },
+                { 
+                    src: 'https://i.imgur.com/erIK2XY.png', 
+                    alt: '506 Tennis Center',
+                    title: '506 Tennis Center',
+                    description: '5 Full size tennis courts',
+                    link: 'https://506tenniscenter.com/tennis-facility/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/eU3IlyE.png', 
+                    alt: 'Hike through the jungle of Nosara',
+                    title: 'Hike through the jungle of Nosara',
+                    description: 'The sun rises over the Nosara Biological Reserve, over 90 acres of 300-year-old mangroves, intertwined with Panama tree leaves dripping morning dew on the soil below',
+                    link: 'hhttps://www.costarica.com/attractions/nosara-biological-reserve'
+                },
+                { 
+                    src: 'https://i.imgur.com/le57P9C.png', 
+                    alt: 'Ostional Turtle Nesting Experience',
+                    title: 'Ostional Turtle Nesting Experience',
+                    description: 'VOn this tour sit back and relax and enjoy the view of the annual turtle migration.',
+                    link: 'https://www.tourguanacaste.com/en/activity/100375/ostional-turtle-nesting-experience'
                 },
 
             ];
