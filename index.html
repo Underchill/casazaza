@@ -48,6 +48,12 @@
         #activities-gallery.gallery-expanded > div {
             display: flex; /* Use flex instead of block to maintain card layout */
         }
+        #food-gallery > div:nth-child(n+7) {
+            display: none;
+        }
+        #food-gallery.gallery-expanded > div {
+            display: flex; /* Use flex instead of block to maintain card layout */
+        }
         /* Class to show all items when a gallery is expanded */
         .gallery-grid.gallery-expanded .gallery-item {
             display: block;
@@ -252,10 +258,9 @@
     </footer>
 
     <!-- Full-screen Image Modal -->
-    <div id="image-modal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden opacity-0">
-        <span id="close-modal" class="absolute top-6 right-8 text-white text-5xl font-bold cursor-pointer hover:text-gold z-20">&times;</span>
+  <div id="image-modal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <span id="close-modal" class="absolute top-6 right-8 text-white text-5xl font-bold cursor-pointer hover:text-gold z-20">×</span>
         
-        <!-- Prev/Next Arrows -->
         <button id="prev-btn" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 transition-colors z-20">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -269,17 +274,30 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
         </button>
+
+        <div id="modal-info-box" class="absolute bottom-4 left-1/2 -translate-x-1/2 w-full max-w-3xl bg-black/60 p-6 rounded-lg text-center hidden backdrop-blur-sm">
+            <h3 id="modal-title" class="text-3xl font-bold text-gold mb-2"></h3>
+            <p id="modal-description" class="text-gray-200 mb-4"></p>
+            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-block bg-gold text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-yellow-600">
+                Visit Website
+            </a>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('image-modal');
-            const modalImage = document.getElementById('modal-image');
-            const closeModalBtn = document.getElementById('close-modal');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
+            const modal = document.querySelector('#image-modal');
+            const modalImage = modal.querySelector('#modal-image');
+            const closeModalBtn = modal.querySelector('#close-modal');
+            const prevBtn = modal.querySelector('#prev-btn');
+            const nextBtn = modal.querySelector('#next-btn');
+            const modalInfoBox = modal.querySelector('#modal-info-box');
+            const modalTitle = modal.querySelector('#modal-title');
+            const modalDescription = modal.querySelector('#modal-description');
+            const modalLink = modal.querySelector('#modal-link');
 
             let currentImageIndex = 0;
+            // ... the rest of your script remains the same
             let activeImageList = [];
 
             // --- Gallery Image Data ---
@@ -412,16 +430,77 @@
                     src: 'https://i.imgur.com/le57P9C.png', 
                     alt: 'Ostional Turtle Nesting Experience',
                     title: 'Ostional Turtle Nesting Experience',
-                    description: 'VOn this tour sit back and relax and enjoy the view of the annual turtle migration.',
+                    description: 'On this tour sit back and relax and enjoy the view of the annual turtle migration.',
                     link: 'https://www.tourguanacaste.com/en/activity/100375/ostional-turtle-nesting-experience'
                 },
 
             ];
 
             const foodGallery= [
-                { src: 'https://i.imgur.com/nX2WNdU.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/12hGQDW.jpeg', alt: 'Nature around Casa Zaza' },
-                { src: 'https://i.imgur.com/7b99oj6.jpeg', alt: 'Nature around Casa Zaza' },
+                { 
+                    src: 'https://i.imgur.com/bwWp599.jpeg', 
+                    alt: 'Organico Grocer & Bakery',
+                    title: 'Organico Grocer & Bakery',
+                    description: 'Fresh baked goods, organic juice, locally sourced produce, free-range meat, and the daily staples you need to live well.',
+                    link: 'https://www.organiconosara.com/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/uiAmsgi.png', 
+                    alt: 'Esh Bakery',
+                    title: 'Esh Bakery',
+                    description: 'From crusty sourdough loaves to buttery pastries and rich, smooth coffee',
+                    link: 'https://eshnosara.com/home'
+                },
+                { 
+                    src: 'https://i.imgur.com/4Iujdrq.jpeg', 
+                    alt: 'Rosi\'s Soda Tica',
+                    title: 'Rosi\'s Soda Tica',
+                    description: 'Traditional homemade dishes that truly capture the essence of local cuisine. Absolutely the best local fish, meats, veggies and fruits.',
+                    link: 'https://www.tripadvisor.com/Restaurant_Review-g656474-d2457116-Reviews-Rosi_s_Soda_Tica-Nosara_Province_of_Guanacaste.html'
+                },
+                { 
+                    src: 'https://i.imgur.com/IEQbAIv.jpeg', 
+                    alt: 'Beach Dog Cafe',
+                    title: 'Beach Dog Cafe',
+                    description: 'Delicious, Creative, Organic Fresh & local.',
+                    link: 'https://beachdogcafenosara.com/'
+                },
+                { 
+                    src: 'https://i.imgur.com/rYwsF8M.jpeg', 
+                    alt: 'Mamagui Nosara',
+                    title: 'Mamagui Nosara',
+                    description: 'Across Athens, New York, London, and now Costa Rica, this culinary passion centers around crafting authentic Italian dishes.',
+                    link: 'https://www.venuereport.com/venue/mamagui-nosara/'
+                },
+                { 
+                    src: 'https://i.imgur.com/2wnegbj.png', 
+                    alt: 'Restaurante La Luna',
+                    title: 'Restaurante La Luna',
+                    description: 'This is a luxurious oceanfront restaurant in Costa Rica, popular with families for enjoying meals on the beach',
+                    link: 'https://lalunanosara.com/'
+                },
+                { 
+                    src: 'https://i.imgur.com/N1eaHMz.png', 
+                    alt: 'Coyol Nosara',
+                    title: 'Coyol Nosara',
+                    description: 'Coyol is an incredible top-of-the-mountain restaurant. The adventurous drive, coupled with the breathtaking sunset views, sets the stage for a unique dining experience.',
+                    link: 'https://coyolnosara.com/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/7FnZW58.jpeg', 
+                    alt: 'Huacas Restaurant',
+                    title: 'Huacas Restaurant',
+                    description: 'Gastronomy & Mixology at Tierra Magnifica',
+                    link: 'https://www.huacasrest.com/menu'
+                },
+                { 
+                    src: 'https://i.imgur.com/3r8oWOl.png', 
+                    alt: 'Super Nosara',
+                    title: 'Super Nosara',
+                    description: 'Food shopping at Super Nosara',
+                    link: 'https://www.instagram.com/explore/locations/1503993542995118/super-nosara/?hl=en'
+                },
+
             ];
 
             const natureImages = [
@@ -441,14 +520,14 @@
                 if (!galleryElement) return;
 
                 images.forEach((image, index) => {
-                    // Check if we are populating the activities gallery
-                    if (galleryElement.id === 'activities-gallery') {
+                    // Check if we want to add a link to the image.
+                    if (galleryElement.id === 'activities-gallery' || galleryElement.id === 'food-gallery') {
                         // Create the new activity card with a link
                         const card = document.createElement('div');
                         card.className = 'flex flex-col bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300';
                         
                         card.innerHTML = `
-                            <img src="${image.src}" alt="${image.alt}" class="w-full h-48 object-cover">
+                            <img src="${image.src}" alt="${image.alt}" class="w-full h-48 object-cover cursor-pointer">
                             <div class="p-6 flex flex-col flex-grow">
                                 <h3 class="text-2xl font-bold text-gold mb-3">${image.title}</h3>
                                 <p class="text-gray-400 leading-relaxed mb-4 flex-grow">${image.description}</p>
@@ -457,6 +536,13 @@
                                 </a>
                             </div>
                         `;
+
+                        // NEW: Find the image element within the newly created card
+                        const cardImage = card.querySelector('img');
+                        
+                        // NEW: Add a click event listener to the image to open the modal
+                        cardImage.addEventListener('click', () => openModal(images, index));
+
                         galleryElement.appendChild(card);
 
                     } else {
@@ -531,7 +617,19 @@
                 } else {
                     currentImageIndex = index;
                 }
-                modalImage.src = activeImageList[currentImageIndex].src;
+
+                const currentImage = activeImageList[currentImageIndex];
+                modalImage.src = currentImage.src;
+
+                // NEW LOGIC: Check for and display extra info (title, description, link)
+                if (currentImage.title && currentImage.description && currentImage.link) {
+                    modalTitle.textContent = currentImage.title;
+                    modalDescription.textContent = currentImage.description;
+                    modalLink.href = currentImage.link;
+                    modalInfoBox.classList.remove('hidden'); // Show the info box
+                } else {
+                    modalInfoBox.classList.add('hidden'); // Hide info box for regular photos
+                }
             }
 
             function showNextImage() {
@@ -560,6 +658,7 @@
             }
 
             // --- Event Listeners ---
+
             closeModalBtn.addEventListener('click', closeModal);
             modalImage.addEventListener('click', closeModal); // NEW: Click image to close
 
@@ -598,11 +697,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
