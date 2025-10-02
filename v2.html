@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Zaza - Luxury Retreat in Nosara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use Inter for body text and Playfair Display for headings for an elegant feel */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* A deep, dark blue-gray */
+            color: #e2e8f0; /* A soft, off-white */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-gold {
+            color: #d69e2e; /* A rich, warm gold for accents */
+        }
+        .bg-gold {
+            background-color: #d69e2e;
+        }
+        /* Style for the gallery image hover effect */
+        .gallery-item img {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        /* Styles for the full-screen modal */
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        .gallery-grid .gallery-item:nth-child(n+7) {
+            display: none;
+        }
+        .gallery-grid.gallery-expanded .gallery-item {
+            display: block;
+        }
+        #activities-gallery > div:nth-child(n+7) {
+            display: none;
+        }
+        #activities-gallery.gallery-expanded > div {
+            display: flex; /* Use flex instead of block to maintain card layout */
+        }
+        #food-gallery > div:nth-child(n+7) {
+            display: none;
+        }
+        #food-gallery.gallery-expanded > div {
+            display: flex; /* Use flex instead of block to maintain card layout */
+        }
+        /* NEW: Sticky Navigation Bar Styles */
+        #sticky-nav {
+            transition: top 0.3s ease-in-out;
+        }
+        .sticky-nav-active {
+            top: 0 !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+        }
+
+        .sticky-button {
+            position: fixed;
+            bottom: 1.5rem; /* 24px */
+            left: 50%;      /* Move the left edge to the center */
+            z-index: 40; /* Keeps it above page content but below the image modal */
+            transform: translateX(-50%); /* Shift the button left by half its own width */
+        }
+    </style>
+</head>
+<body class="antrazaliased">
+
+    <!-- Header & Hero Section -->
+    <header id="home" class="relative h-screen flex items-center justify-center text-center">
+        <!-- Static Header for Logo -->
+        <div class="absolute top-0 left-0 right-0 z-20 p-6 md:p-8">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="#home" class="text-2xl md:text-3xl font-bold tracking-wider text-white drop-shadow-md">Casa Zaza</a>
+                 <a href="#contact" class="hidden md:inline-block bg-gold text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Inquire Now</a>
+            </div>
+        </div>
+        
+        <!-- Background Image & Overlay -->
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <img src="https://i.imgur.com/cSbT1Xs.jpeg" 
+             onerror="this.onerror=null;this.src='https://i.imgur.com/lZuJUM2.jpeg';"
+             alt="Stunning modern villa with a pool at dusk" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 bg-gray-900/50 text-green-300 p-8 rounded-lg shadow-2xl max-w-4xl mx-4">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">Your Private Nosara Sanctuary</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto">Completed in 2024, this luxurious gated multi family compound offers the perfect combination of modern design and natural beauty, just a 5-minute walk from Pelada Beach.</p>
+        </div>
+    </header>
+
+    <!-- NEW: Sticky Navigation Bar -->
+    <nav id="sticky-nav" class="fixed top-[-100px] left-0 right-0 z-40 bg-gray-900/70">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <span class="text-xl font-bold text-white">Casa Zaza</span>
+            <div class="hidden md:flex items-center space-x-6 text-white">
+                <a href="#about" class="hover:text-gold transition-colors">The Villa</a>
+                <a href="#amenities" class="hover:text-gold transition-colors">Amenities</a>
+                <a href="#galleries" class="hover:text-gold transition-colors">Galleries</a>
+                <a href="#location" class="hover:text-gold transition-colors">Location</a>
+            </div>
+            <a href="#contact" class="bg-gold text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Inquire Now</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 md:p-12">
+        
+        <!-- Introduction Section -->
+        <section id="about" class="text-center my-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">An Unforgettable Costa Rican Escape</h2>
+            <p class="max-w-4xl mx-auto text-lg text-gray-400 leading-relaxed mb-12">
+                Welcome to Casa Zaza, your tropical gated multi-family retreat! With 4 bedrooms in the main house and 2 additional independent fully equipped studio suites, our villa comfortably accommodates up to 12 guests. Enjoy the amazing 10-meter saltwater lap pool, lush gardens, and easy access to the beach via the famous Monkey Trail.
+            </p>
+
+            <!-- NEW: "About the Space" Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-gold mb-2">Main House</h3>
+                    <p class="text-gray-400">Features 4 spacious bedrooms, a gourmet kitchen, open-plan living area, and direct access to the pool. Ideal for a large family.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-gold mb-2">Two Studio Suites</h3>
+                    <p class="text-gray-400">Each studio is fully independent with its own kitchenette, bathroom, and private entrance, offering flexibility for your group.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-gold mb-2">Outdoor Living</h3>
+                    <p class="text-gray-400">A stunning 10m saltwater lap pool is the centerpiece, complemented by a rancho kitchen, outdoor shower, and lush tropical gardens.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="w-24 h-px bg-gold mx-auto my-16"></div>
+        
+        <!-- Amenities Section -->
+        <section id="amenities" class="my-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Luxury Amenities</h2>
+            <!-- NEW: Improved Layout with Icons -->
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Private Saltwater Pool</h3>
+                    <p class="text-gray-400">Relax by your private 10-meter long saltwater lap pool, surrounded by tropical greenery.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Gourmet Kitchen</h3>
+                    <p class="text-gray-400">A spacious kitchen with state-of-the-art appliances and reverse osmosis water filtration system.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Outdoor Kitchen</h3>
+                    <p class="text-gray-400">This rancho kitchen allows guests to enjoy their time by the pool while being able to grill in style.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Dual Laundry Rooms</h3>
+                    <p class="text-gray-400">On site laundry for both houses allows for extended stays with ease.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Garage Parking</h3>
+                    <p class="text-gray-400">Comfort extends to your vehicle, get out of the rain or shine and start relaxing.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-gold mb-3">Climate Control</h3>
+                    <p class="text-gray-400">Don't worry about the weather, its always perfect inside.</p>
+                </div>
+                 <div class="p-6 md:col-span-3 text-center">
+                    <h3 class="text-2xl font-bold text-gold mb-3">And Much More...</h3>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Outdoor rancho kitchen, outdoor shower, heated bidet seats, dual laundry, safety deposit boxes, three baby cribs, garage parking, and a backup generator for uninterrupted comfort.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div id="galleries" class="w-24 h-px bg-gold mx-auto my-16"></div>
+
+        <!-- Galleries Section -->
+        <section class="my-16">
+             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Explore Casa Zaza & Nosara</h2>
+
+            <!-- Main Villa Gallery -->
+            <div id="professional-gallery-section" class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gold">The Main Villa</h3>
+                <div id="professional-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
+                <div class="text-center mt-8">
+                    <button id="show-more-btn-professional" class="bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                    <button id="show-less-btn-professional" class="hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                </div>
+            </div>
+
+            <!-- Studio Gallery -->
+            <div id="studio-gallery-section" class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gold">The Studio Suites</h3>
+                <div id="studio-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
+                <div class="text-center mt-8">
+                    <button id="show-more-btn-studio" class="bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                    <button id="show-less-btn-studio" class="hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                </div>
+            </div>
+
+            <!-- Food Gallery -->
+            <div id="food-gallery-section" class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gold">Culinary Adventures</h3>
+                <div id="food-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
+                <div class="text-center mt-8">
+                    <button id="show-more-btn-food" class="bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                    <button id="show-less-btn-food" class="hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                </div>
+            </div>
+
+            <!-- Activities Gallery -->
+            <div id="outside-gallery-section" class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gold">Local Activities</h3>
+                <div id="activities-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
+                <div class="text-center mt-8">
+                    <button id="show-more-btn-activities" class="bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                    <button id="show-less-btn-activities" class="hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                </div>
+            </div>
+            
+            <!-- Nature Gallery -->
+            <div id="nature-gallery-section" class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gold">Surrounding Nature</h3>
+                <div id="nature-gallery" class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
+                <div class="text-center mt-8">
+                    <button id="show-more-btn-nature" class="bg-gold text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300">Show More</button>
+                    <button id="show-less-btn-nature" class="hidden bg-gray-700 text-gold font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors duration-300">Show Less</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact/Booking Section -->
+        <section id="contact" class="text-center my-24 py-16 bg-gray-800 rounded-lg">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Reserve Your Stay</h2>
+            <!-- NEW: Improved Rates Layout -->
+            <div class="max-w-3xl mx-auto text-lg text-gray-400 mb-8 px-6">
+                <h4 class="text-2xl font-bold text-gold mb-6">Seasonal Rates</h4>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                    <div class="border border-gray-600 p-6 rounded-lg w-full md:w-1/2">
+                        <h5 class="text-xl font-semibold text-white">Standard Season</h5>
+                        <p class="text-3xl font-bold my-2 text-gold">$155</p>
+                        <p>/per bedroom /night</p>
+                        <p class="text-sm mt-2">($6550/week for the compound)</p>
+                    </div>
+                    <div class="border border-gray-600 p-6 rounded-lg w-full md:w-1/2">
+                        <h5 class="text-xl font-semibold text-white">Holiday Season</h5>
+                        <p class="text-3xl font-bold my-2 text-gold">$216</p>
+                         <p>/per bedroom /night</p>
+                        <p class="text-sm mt-2">($9100/week for the compound)</p>
+                    </div>
+                </div>
+                <p class="text-sm mt-6">Long term rentals available upon request. Please inquire for pricing.</p>
+            </div>
+            <a href="mailto:zaza.jackman@gmail.com" class="bg-gold text-gray-900 font-bold py-4 px-10 rounded-lg text-lg hover:bg-yellow-600 transition-colors duration-300 transform hover:scale-105 inline-block">
+                Inquire for Availability
+            </a>
+        </section>
+
+        <!-- Guest Information Section -->
+        <section class="my-16">
+             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Important Guest Information</h2>
+             <div class="max-w-4xl mx-auto space-y-8 text-gray-400">
+                 <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Property Management & Concierge</h4>
+                     <p>Our property manager is available to assist you daily. This listing includes complimentary concierge services to help curate your perfect Costa Rican experience, from booking surf lessons and ATV tours to arranging rental cars, private chefs, and massages.</p>
+                 </div>
+                 <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Security</h4>
+                     <p>Nosara is a wonderful community. However, like any tourist area, petty theft can occur. We recommend guests to keep cars locked when outside of the compound. We advise securing valuables in provided safety deposit boxes and ensuring all security features are enabled when leaving the property.</p>
+                 </div>
+                 <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Jungle Creatures</h4>
+                     <p>Welcome to the jungle! While we make every effort to present a well-cleaned home, nature is all around us. You can expect to see ants, beetles, spiders, and other insects. To minimize their presence, please keep food wrapped and stored, and screen doors closed. The local howler monkeys are friendly and stay in the upper tree canopy.</p>
+                 </div>
+                 <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Backup Utilities</h4>
+                     <p>For uninterrupted service, the compound is equipped with an industrial generator and water delivery service. Hardline networking delivered through an uninterruptable power supply.</p>
+                 </div>
+                  <div>
+                     <h4 class="text-2xl font-bold text-gold mb-2">Refunds & Insurance</h4>
+                     <p>No refunds will be given for natural disasters, utility outages, security breaches, or nearby construction noise. We strongly encourage all guests to purchase Traveler Insurance to protect against unforeseen circumstances.</p>
+                 </div>
+             </div>
+        </section>
+        
+        <!-- Location/Map Section -->
+        <section id="location" class="my-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Our Location</h2>
+            <div class="max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-gray-700">
+                <iframe
+                    class="w-full h-96 md:h-[500px]"
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d11342.715865551045!2d-85.67625496755004!3d9.962577857637154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOcKwNTcnNDQuMSJOIDg1wrA0MCczMC40Ilc!5e1!3m2!1sen!2sus!4v1758925385441!5m2!1sen!2sus"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center p-8 border-t border-gray-700">
+        <p class="text-gray-500">&copy; 2024 Casa Zaza. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Full-screen Image Modal -->
+    <div id="image-modal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <span id="close-modal" class="absolute top-6 right-8 text-white text-5xl font-bold cursor-pointer hover:text-gold z-20">×</span>
+        <button id="prev-btn" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 transition-colors z-20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <img id="modal-image" src="" alt="Full-screen view of gallery image" class="modal-content object-contain rounded-lg shadow-2xl cursor-pointer" loading="lazy">
+        <button id="next-btn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 transition-colors z-20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div id="modal-info-box" class="absolute bottom-4 left-1/2 -translate-x-1/2 w-full max-w-3xl bg-black/60 p-6 rounded-lg text-center hidden backdrop-blur-sm">
+            <h3 id="modal-title" class="text-3xl font-bold text-gold mb-2"></h3>
+            <p id="modal-description" class="text-gray-200 mb-4"></p>
+            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-block bg-gold text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-yellow-600">Visit Website</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- NEW: Sticky Navigation Logic ---
+            const stickyNav = document.getElementById('sticky-nav');
+            const heroSection = document.getElementById('home');
+            
+            const observer = new IntersectionObserver(entries => {
+                // The hero section is NOT intersecting the viewport (i.e., we've scrolled past it)
+                if (!entries[0].isIntersecting) {
+                    stickyNav.classList.add('sticky-nav-active');
+                } else {
+                    stickyNav.classList.remove('sticky-nav-active');
+                }
+            }, {
+                // Fire when the hero section is completely out of view
+                threshold: 0 
+            });
+
+            // Start observing the hero section
+            observer.observe(heroSection);
+
+
+            const modal = document.querySelector('#image-modal');
+            const modalImage = modal.querySelector('#modal-image');
+            const closeModalBtn = modal.querySelector('#close-modal');
+            const prevBtn = modal.querySelector('#prev-btn');
+            const nextBtn = modal.querySelector('#next-btn');
+            const modalInfoBox = modal.querySelector('#modal-info-box');
+            const modalTitle = modal.querySelector('#modal-title');
+            const modalDescription = modal.querySelector('#modal-description');
+            const modalLink = modal.querySelector('#modal-link');
+
+            let currentImageIndex = 0;
+            let activeImageList = [];
+
+            // --- Gallery Image Data ---
+            const professionalImages = [
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/k3pytvwk0/midres/9E2A3688-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/mjm3wsnxd/midres/9E2A3711-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/nzt3phjrc/midres/9E2A3787-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/ehap2zwyw/midres/9E2A3802-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/2hl7r5dwv/midres/9E2A3829-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/b9agy69jq/midres/9E2A3739-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/4AxBCEg.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/jp5pn8naz/midres/0R6A0385-HDR-2.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/53d5z61ho/midres/9E2A3856-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/ujtxdgjk3/midres/9E2A3676-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/0qz88k97c/midres/9E2A3727-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/VO5z0DB.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://i.imgur.com/Unx52Cs.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/6znkdej5w/midres/9E2A3463-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/7aoyyabsm/midres/9E2A3468-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/55b9jzuf3/midres/9E2A3496-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/dm2458gcq/midres/9E2A3514-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/rRFhCl4.jpeg', alt: 'Interior of Casa Zaza' },
+                { src: 'https://i.imgur.com/7VhWtdT.jpeg', alt: 'Interior of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/bnggj8ul6/midres/9E2A3556-HDR.jpg', alt: 'FIRST FLOOR BATHROOM' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/rpbvmwybw/midres/9E2A3538-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/0bo3tvgfk/midres/9E2A3544-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/3umzzx3ru/midres/9E2A3542.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/17r6rx9lw/midres/9E2A3604-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/TqMEQTn.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/6k5yirhhl/midres/9E2A3579-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/6sgvu27kt/midres/9E2A3595-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/tso1qdup4/midres/9E2A3616-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/q8gp851ge/midres/9E2A3619-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/zwrpcaf8z/midres/9E2A3631-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/l4m4pkjvs/midres/9E2A3640-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/sgxv41jgd/midres/9E2A3643-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/7tjl8418d/midres/9E2A3649-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/wc3rso7zw/midres/9E2A3670-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/kQPtNSE.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://i.imgur.com/gHBp7h4.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/bobr2cygp/midres/9E2A3742-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/MstU00H.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://i.imgur.com/IeQqkQu.jpeg', alt: 'Exterior of Casa Zaza' }
+            ];
+            const studioImages = [
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/0n0zt940s/midres/9E2A3874-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/r5hj1t3lt/midres/9E2A3877-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/446amb15y/midres/9E2A3880-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/psb3k2i6v/midres/9E2A3883-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/oe3wd0ozd/midres/9E2A3898-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/pox6bhbtj/midres/9E2A3901-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/lip5p92w9/midres/9E2A3910-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/9ym4pnwb0/midres/9E2A3919-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/zupt6xzey/midres/9E2A3928-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/ozmk36sk7/midres/9E2A3934-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/flodughmb/midres/9E2A3943-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/0rvjpv838/midres/9E2A3952-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/i8ztj4zkm/midres/9E2A3964-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/wjzs0iy77/midres/9E2A3967-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/so14swoyf/midres/0R6A0397-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/hR0ImSu.jpeg', alt: 'Exterior of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/54sx86bvw/midres/0R6A0370-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/atpjlwwad/midres/9E2A3733-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://i.imgur.com/t90BErS.jpeg', alt: 'Interior of Casa Zaza' },
+                { src: 'https://i.imgur.com/ArWdYZu.jpeg', alt: 'Interior of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/3sxu96kap/midres/0R6A0322-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/ivw5a30z4/midres/0R6A0406-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
+                { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/blteyjf80/midres/0R6A0434.jpg', alt: 'Professional photo of Casa Zaza' }
+            ];
+            const activitiesGallery = [
+                { src: 'https://i.imgur.com/2f0EyEN.jpeg', alt: 'Sport Fishing', title: 'Sport Fishing Nosara', description: 'The Best Sportfishing in Costa Rica', link: 'https://www.fishingnosara.com/' },
+                { src: 'https://i.imgur.com/69DS8CM.gif', alt: 'Open Ocean Sup Or Kayak Tour', title: 'Experience Nosara Kayak Tour', description: 'Professional Kayak or Paddle Boarding Tours', link: 'https://www.experience-nosara.com/tours/open-ocean-sup-or-kayak-tour/' },
+                { src: 'https://i.imgur.com/4Iujdrq.jpeg', alt: 'Nature tours with Gabriela', title: 'Nature tours with Gabriela', description: 'Hiking, Kayak and Horse Riding in Nosara', link: 'https://www.naturetoursgabriela.com/433581537' },
+                { src: 'https://i.imgur.com/YljoK7r.jpeg', alt: '506 Tennis Center', title: '506 Tennis Center', description: '5 Full size tennis courts', link: 'https://506tenniscenter.com/tennis-facility/' },
+                { src: 'https://i.imgur.com/LmWFwiy.png', alt: 'NOSARA Independent Surf', title: 'NOSARA Independent Surf', description: 'Join Costa Rica Top Surfing School', link: 'https://nosaraindependentsurf.com/home' },
+                { src: 'https://i.imgur.com/GVeKR8Z.png', alt: 'Mala Noche Waterfall Tour', title: 'Mala Noche Waterfall Tour', description: 'Visit one of Mother Nature’s most amazing creations in the heart of the jungle', link: 'https://monkeyquads.com/tours/mala-noche-waterfall-tour/' },
+                { src: 'https://i.imgur.com/erIK2XY.png', alt: 'Nexus Yoga Institute of Nosara', title: 'Nexus Yoga Institute of Nosara', description: 'Empowering optimal wellbeing and clear purpose', link: 'https://www.nexusyoga.com/' },
+                { src: 'https://i.imgur.com/eU3IlyE.png', alt: 'Hike through the jungle of Nosara', title: 'Hike through the jungle of Nosara', description: 'The sun rises over the Nosara Biological Reserve, over 90 acres of 300-year-old mangroves.', link: 'https://www.costarica.com/attractions/nosara-biological-reserve' },
+                { src: 'https://i.imgur.com/le57P9C.png', alt: 'Ostional Turtle Nesting Experience', title: 'Ostional Turtle Nesting Experience', description: 'On this tour sit back and relax and enjoy the view of the annual turtle migration', link: 'https://www.tourguanacaste.com/en/activity/100375/ostional-turtle-nesting-experience' },
+            ];
+            const foodGallery= [
+                { src: 'https://i.imgur.com/bwWp599.jpeg', alt: 'Organico Grocer & Bakery', title: 'Organico Grocer & Bakery', description: 'Fresh baked goods, organic juice, locally sourced produce, free-range meat, and the daily staples you need.', link: 'https://www.organiconosara.com/' },
+                { src: 'https://i.imgur.com/uiAmsgi.png', alt: 'Esh Bakery', title: 'Esh Bakery', description: 'From crusty sourdough loaves to buttery pastries and rich, smooth coffee. Full breakfast and lunch.', link: 'https://eshnosara.com/home' },
+                { src: 'https://i.imgur.com/rTh0xQW.png', alt: 'Rosi\'s Soda Tica', title: 'Rosi\'s Soda Tica', description: 'Traditional homemade dishes that truly capture the essence of local cuisine. The best local fish, meats & veggies.', link: 'https://www.tripadvisor.com/Restaurant_Review-g656474-d2457116-Reviews-Rosi_s_Soda_Tica-Nosara_Province_of_Guanacaste.html' },
+                { src: 'https://i.imgur.com/IEQbAIv.jpeg', alt: 'Beach Dog Cafe', title: 'Beach Dog Cafe', description: 'Delicious, Creative, Organic Fresh & local. The best Margaritas and Mocktails in town. Live music at night.', link: 'https://beachdogcafenosara.com/' },
+                { src: 'https://i.imgur.com/rYwsF8M.jpeg', alt: 'Mamagui Nosara', title: 'Mamagui Nosara', description: 'Across Athens, New York, London, and now Costa Rica, this culinary passion centers around crafting authentic Italian dishes.', link: 'https://www.venuereport.com/venue/mamagui-nosara/' },
+                { src: 'https://i.imgur.com/2wnegbj.png', alt: 'Restaurante La Luna', title: 'Restaurante La Luna', description: 'A luxurious oceanfront restaurant with unforgettable sunset views and Mediterranean Cuisine.', link: 'https://lalunanosara.com/' },
+                { src: 'https://i.imgur.com/N1eaHMz.png', alt: 'Coyol Nosara', title: 'Coyol Nosara', description: 'An incredible top-of-the-mountain restaurant with breathtaking views and wood-fired smoked pork ribs.', link: 'https://coyolnosara.com/' },
+                { src: 'https://i.imgur.com/7FnZW58.jpeg', alt: 'Huacas Restaurant', title: 'Huacas Restaurant', description: 'Gastronomy & Mixology at Tierra Magnifica, Top of the mountain, breathtaking views.', link: 'https://www.huacasrest.com/menu' },
+                { src: 'https://i.imgur.com/3r8oWOl.png', alt: 'Super Nosara', title: 'Super Nosara', description: 'Food shopping at Super Nosara', link: 'https://www.instagram.com/explore/locations/1503993542995118/super-nosara/?hl=en' },
+            ];
+            const natureImages = [
+                { src: 'https://i.imgur.com/tgWh2Jj.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/u5dEBcW.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/OkFaNyi.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/WYb1Uub.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/4HnWnCd.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/DTw4vq9.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/I5Dpxfz.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/Y8GZ105.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/p7MXXWi.jpeg', alt: 'Nature around Casa Zaza' },
+                { src: 'https://i.imgur.com/J4pDnli.jpeg', alt: 'Nature around Casa Zaza' }
+            ];
+
+            function populateGallery(galleryElement, images) {
+                if (!galleryElement) return;
+
+                images.forEach((image, index) => {
+                    if (galleryElement.id === 'activities-gallery' || galleryElement.id === 'food-gallery') {
+                        const card = document.createElement('div');
+                        card.className = 'flex flex-col bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300';
+                        card.innerHTML = `
+                            <img src="${image.src}" alt="${image.alt}" class="w-full h-48 object-cover cursor-pointer" loading="lazy">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h3 class="text-2xl font-bold text-gold mb-3">${image.title}</h3>
+                                <p class="text-gray-400 leading-relaxed mb-4 flex-grow">${image.description}</p>
+                                <a href="${image.link}" target="_blank" rel="noopener noreferrer" class="inline-block text-center bg-gold text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-yellow-600 transition-colors duration-300 mt-auto">Learn More</a>
+                            </div>`;
+                        const cardImage = card.querySelector('img');
+                        cardImage.addEventListener('click', () => openModal(images, index));
+                        galleryElement.appendChild(card);
+                    } else {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'gallery-item cursor-pointer overflow-hidden rounded-lg shadow-lg';
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image.src;
+                        imgElement.alt = image.alt;
+                        imgElement.className = 'w-full h-full object-cover aspect-video';
+                        imgElement.loading = 'lazy'; // Add lazy loading
+                        imgElement.onerror = function() {
+                            this.onerror=null;
+                            this.src='https://placehold.co/800x450/1a202c/e2e8f0?text=Image+Not+Found';
+                        };
+                        galleryItem.appendChild(imgElement);
+                        galleryElement.appendChild(galleryItem);
+                        galleryItem.addEventListener('click', () => openModal(images, index));
+                    }
+                });
+            }
+            
+            function setupExpandableGallery(galleryId, showMoreBtnId, showLessBtnId, sectionId, images) {
+                const gallery = document.getElementById(galleryId);
+                const showMoreBtn = document.getElementById(showMoreBtnId);
+                const showLessBtn = document.getElementById(showLessBtnId);
+                if (!gallery || !showMoreBtn || !showLessBtn) return;
+                if (images.length <= 6) {
+                    showMoreBtn.style.display = 'none';
+                    showLessBtn.style.display = 'none';
+                }
+                populateGallery(gallery, images);
+                showMoreBtn.addEventListener('click', () => {
+                    gallery.classList.add('gallery-expanded');
+                    showMoreBtn.classList.add('hidden');
+                    showLessBtn.classList.remove('hidden');
+                    showLessBtn.classList.add('sticky-button'); 
+                });
+                showLessBtn.addEventListener('click', () => {
+                    gallery.classList.remove('gallery-expanded');
+                    showMoreBtn.classList.remove('hidden');
+                    showLessBtn.classList.add('hidden');
+                    showLessBtn.classList.remove('sticky-button'); 
+                    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // Initialize all galleries
+            setupExpandableGallery('professional-gallery', 'show-more-btn-professional', 'show-less-btn-professional', 'professional-gallery-section', professionalImages);
+            setupExpandableGallery('studio-gallery', 'show-more-btn-studio', 'show-less-btn-studio', 'studio-gallery-section', studioImages);
+            setupExpandableGallery('activities-gallery', 'show-more-btn-activities', 'show-less-btn-activities', 'outside-gallery-section', activitiesGallery);
+            setupExpandableGallery('food-gallery', 'show-more-btn-food', 'show-less-btn-food', 'food-gallery-section', foodGallery);
+            setupExpandableGallery('nature-gallery', 'show-more-btn-nature', 'show-less-btn-nature', 'nature-gallery-section', natureImages);
+
+            // Modal Functionality
+            function showImage(index) {
+                if (index >= activeImageList.length) currentImageIndex = 0;
+                else if (index < 0) currentImageIndex = activeImageList.length - 1;
+                else currentImageIndex = index;
+                const currentImage = activeImageList[currentImageIndex];
+                modalImage.src = currentImage.src;
+                if (currentImage.title && currentImage.description && currentImage.link) {
+                    modalTitle.textContent = currentImage.title;
+                    modalDescription.textContent = currentImage.description;
+                    modalLink.href = currentImage.link;
+                    modalInfoBox.classList.remove('hidden');
+                } else {
+                    modalInfoBox.classList.add('hidden');
+                }
+            }
+            function showNextImage() { showImage(currentImageIndex + 1); }
+            function showPrevImage() { showImage(currentImageIndex - 1); }
+            function openModal(imageList, index) {
+                activeImageList = imageList;
+                showImage(index);
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            }
+            function closeModal() {
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    activeImageList = [];
+                }, 300);
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modalImage.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevImage(); });
+            nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextImage(); });
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('hidden')) return;
+                if (e.key === 'Escape') closeModal();
+                else if (e.key === 'ArrowRight') showNextImage();
+                else if (e.key === 'ArrowLeft') showPrevImage();
+            });
+        });
+    </script>
+</body>
+</html>
+
