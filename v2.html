@@ -415,6 +415,7 @@
                 { src: 'https://i.imgur.com/MstU00H.jpeg', alt: 'Exterior of Casa Zaza' },
                 { src: 'https://i.imgur.com/IeQqkQu.jpeg', alt: 'Exterior of Casa Zaza' }
             ];
+            
             const studioImages = [
                 { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/0n0zt940s/midres/9E2A3874-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
                 { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/r5hj1t3lt/midres/9E2A3877-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
@@ -440,28 +441,141 @@
                 { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/ivw5a30z4/midres/0R6A0406-HDR.jpg', alt: 'Professional photo of Casa Zaza' },
                 { src: 'https://s3.amazonaws.com/propertybase-clients/00Dd0000000donbEAA/a0CRN00002CaY6T/blteyjf80/midres/0R6A0434.jpg', alt: 'Professional photo of Casa Zaza' }
             ];
+
             const activitiesGallery = [
-                { src: 'https://i.imgur.com/2f0EyEN.jpeg', alt: 'Sport Fishing', title: 'Sport Fishing Nosara', description: 'The Best Sportfishing in Costa Rica', link: 'https://www.fishingnosara.com/' },
-                { src: 'https://i.imgur.com/69DS8CM.gif', alt: 'Open Ocean Sup Or Kayak Tour', title: 'Experience Nosara Kayak Tour', description: 'Professional Kayak or Paddle Boarding Tours', link: 'https://www.experience-nosara.com/tours/open-ocean-sup-or-kayak-tour/' },
-                { src: 'https://i.imgur.com/4Iujdrq.jpeg', alt: 'Nature tours with Gabriela', title: 'Nature tours with Gabriela', description: 'Hiking, Kayak and Horse Riding in Nosara', link: 'https://www.naturetoursgabriela.com/433581537' },
-                { src: 'https://i.imgur.com/YljoK7r.jpeg', alt: '506 Tennis Center', title: '506 Tennis Center', description: '5 Full size tennis courts', link: 'https://506tenniscenter.com/tennis-facility/' },
-                { src: 'https://i.imgur.com/LmWFwiy.png', alt: 'NOSARA Independent Surf', title: 'NOSARA Independent Surf', description: 'Join Costa Rica Top Surfing School', link: 'https://nosaraindependentsurf.com/home' },
-                { src: 'https://i.imgur.com/GVeKR8Z.png', alt: 'Mala Noche Waterfall Tour', title: 'Mala Noche Waterfall Tour', description: 'Visit one of Mother Nature’s most amazing creations in the heart of the jungle', link: 'https://monkeyquads.com/tours/mala-noche-waterfall-tour/' },
-                { src: 'https://i.imgur.com/erIK2XY.png', alt: 'Nexus Yoga Institute of Nosara', title: 'Nexus Yoga Institute of Nosara', description: 'Empowering optimal wellbeing and clear purpose', link: 'https://www.nexusyoga.com/' },
-                { src: 'https://i.imgur.com/eU3IlyE.png', alt: 'Hike through the jungle of Nosara', title: 'Hike through the jungle of Nosara', description: 'The sun rises over the Nosara Biological Reserve, over 90 acres of 300-year-old mangroves.', link: 'https://www.costarica.com/attractions/nosara-biological-reserve' },
-                { src: 'https://i.imgur.com/le57P9C.png', alt: 'Ostional Turtle Nesting Experience', title: 'Ostional Turtle Nesting Experience', description: 'On this tour sit back and relax and enjoy the view of the annual turtle migration', link: 'https://www.tourguanacaste.com/en/activity/100375/ostional-turtle-nesting-experience' },
+                { 
+                    src: 'https://i.imgur.com/2f0EyEN.jpeg', 
+                    alt: 'Sport Fishing',
+                    title: 'Sport Fishing Nosara',
+                    description: 'The Best Sportfishing in Costa Rica',
+                    link: 'https://www.fishingnosara.com/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/69DS8CM.gif', 
+                    alt: 'Open Ocean Sup Or Kayak Tour',
+                    title: 'Experience Nosara Kayak Tour',
+                    description: 'Professional Kayak or Paddle Boarding Tours',
+                    link: 'https://www.experience-nosara.com/tours/open-ocean-sup-or-kayak-tour/'
+                },
+                { 
+                    src: 'https://i.imgur.com/4Iujdrq.jpeg', 
+                    alt: 'Nature tours with Gabriela',
+                    title: 'Nature tours with Gabriela',
+                    description: 'Hiking, Kayak and Horse Riding in Nosara',
+                    link: 'https://www.naturetoursgabriela.com/433581537'
+                },
+                { 
+                    src: 'https://i.imgur.com/YljoK7r.jpeg', 
+                    alt: '506 Tennis Center',
+                    title: '506 Tennis Center',
+                    description: '5 Full size tennis courts',
+                    link: 'https://506tenniscenter.com/tennis-facility/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/LmWFwiy.png', 
+                    alt: 'NOSARA Independent Surf',
+                    title: 'NOSARA Independent Surf',
+                    description: 'Join Costa Rica Top Surfing School',
+                    link: 'https://nosaraindependentsurf.com/home'
+                },
+                { 
+                    src: 'https://i.imgur.com/GVeKR8Z.png', 
+                    alt: 'Mala Noche Waterfall Tour',
+                    title: 'Mala Noche Waterfall Tour',
+                    description: 'Visit one of Mother Nature’s most amazing creations in the heart of the jungle',
+                    link: 'https://monkeyquads.com/tours/mala-noche-waterfall-tour/'
+                },
+                { 
+                    src: 'https://i.imgur.com/erIK2XY.png', 
+                    alt: 'Nexus Yoga Institute of Nosara',
+                    title: 'Nexus Yoga Institute of Nosara',
+                    description: 'Empowering optimal wellbeing and clear purpose',
+                    link: 'https://www.nexusyoga.com/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/eU3IlyE.png', 
+                    alt: 'Hike through the jungle of Nosara',
+                    title: 'Hike through the jungle of Nosara',
+                    description: 'The sun rises over the Nosara Biological Reserve, over 90 acres of 300-year-old mangroves, intertwined with Panama tree leaves dripping morning dew on the soil below',
+                    link: 'https://www.costarica.com/attractions/nosara-biological-reserve'
+                },
+                { 
+                    src: 'https://i.imgur.com/le57P9C.png', 
+                    alt: 'Ostional Turtle Nesting Experience',
+                    title: 'Ostional Turtle Nesting Experience',
+                    description: 'On this tour sit back and relax and enjoy the view of the annual turtle migration',
+                    link: 'https://www.tourguanacaste.com/en/activity/100375/ostional-turtle-nesting-experience'
+                },
+
             ];
+
             const foodGallery= [
-                { src: 'https://i.imgur.com/bwWp599.jpeg', alt: 'Organico Grocer & Bakery', title: 'Organico Grocer & Bakery', description: 'Fresh baked goods, organic juice, locally sourced produce, free-range meat, and the daily staples you need.', link: 'https://www.organiconosara.com/' },
-                { src: 'https://i.imgur.com/uiAmsgi.png', alt: 'Esh Bakery', title: 'Esh Bakery', description: 'From crusty sourdough loaves to buttery pastries and rich, smooth coffee. Full breakfast and lunch.', link: 'https://eshnosara.com/home' },
-                { src: 'https://i.imgur.com/rTh0xQW.png', alt: 'Rosi\'s Soda Tica', title: 'Rosi\'s Soda Tica', description: 'Traditional homemade dishes that truly capture the essence of local cuisine. The best local fish, meats & veggies.', link: 'https://www.tripadvisor.com/Restaurant_Review-g656474-d2457116-Reviews-Rosi_s_Soda_Tica-Nosara_Province_of_Guanacaste.html' },
-                { src: 'https://i.imgur.com/IEQbAIv.jpeg', alt: 'Beach Dog Cafe', title: 'Beach Dog Cafe', description: 'Delicious, Creative, Organic Fresh & local. The best Margaritas and Mocktails in town. Live music at night.', link: 'https://beachdogcafenosara.com/' },
-                { src: 'https://i.imgur.com/rYwsF8M.jpeg', alt: 'Mamagui Nosara', title: 'Mamagui Nosara', description: 'Across Athens, New York, London, and now Costa Rica, this culinary passion centers around crafting authentic Italian dishes.', link: 'https://www.venuereport.com/venue/mamagui-nosara/' },
-                { src: 'https://i.imgur.com/2wnegbj.png', alt: 'Restaurante La Luna', title: 'Restaurante La Luna', description: 'A luxurious oceanfront restaurant with unforgettable sunset views and Mediterranean Cuisine.', link: 'https://lalunanosara.com/' },
-                { src: 'https://i.imgur.com/N1eaHMz.png', alt: 'Coyol Nosara', title: 'Coyol Nosara', description: 'An incredible top-of-the-mountain restaurant with breathtaking views and wood-fired smoked pork ribs.', link: 'https://coyolnosara.com/' },
-                { src: 'https://i.imgur.com/7FnZW58.jpeg', alt: 'Huacas Restaurant', title: 'Huacas Restaurant', description: 'Gastronomy & Mixology at Tierra Magnifica, Top of the mountain, breathtaking views.', link: 'https://www.huacasrest.com/menu' },
-                { src: 'https://i.imgur.com/3r8oWOl.png', alt: 'Super Nosara', title: 'Super Nosara', description: 'Food shopping at Super Nosara', link: 'https://www.instagram.com/explore/locations/1503993542995118/super-nosara/?hl=en' },
+                { 
+                    src: 'https://i.imgur.com/bwWp599.jpeg', 
+                    alt: 'Organico Grocer & Bakery',
+                    title: 'Organico Grocer & Bakery',
+                    description: 'Fresh baked goods, organic juice, locally sourced produce, free-range meat, and the daily staples you need to live well. Hot Bar breakfast, lunch, and dinner.',
+                    link: 'https://www.organiconosara.com/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/uiAmsgi.png', 
+                    alt: 'Esh Bakery',
+                    title: 'Esh Bakery',
+                    description: 'From crusty sourdough loaves to buttery pastries and rich, smooth coffee. Full breakfast and lunch, fantastic smoothies, and a cold-press juice bar.',
+                    link: 'https://eshnosara.com/home'
+                },
+                { 
+                    src: 'https://i.imgur.com/rTh0xQW.png', 
+                    alt: 'Rosi\'s Soda Tica',
+                    title: 'Rosi\'s Soda Tica',
+                    description: 'Traditional homemade dishes that truly capture the essence of local cuisine. Absolutely the best local fish, meats, veggies and fruits.',
+                    link: 'https://www.tripadvisor.com/Restaurant_Review-g656474-d2457116-Reviews-Rosi_s_Soda_Tica-Nosara_Province_of_Guanacaste.html'
+                },
+                { 
+                    src: 'https://i.imgur.com/IEQbAIv.jpeg', 
+                    alt: 'Beach Dog Cafe',
+                    title: 'Beach Dog Cafe',
+                    description: 'Delicious, Creative, Organic Fresh & local. The best Margaritas and Mocktails in town. Live music at night.',
+                    link: 'https://beachdogcafenosara.com/'
+                },
+                { 
+                    src: 'https://i.imgur.com/rYwsF8M.jpeg', 
+                    alt: 'Mamagui Nosara',
+                    title: 'Mamagui Nosara',
+                    description: 'Across Athens, New York, London, and now Costa Rica, this culinary passion centers around crafting authentic Italian dishes.',
+                    link: 'https://www.venuereport.com/venue/mamagui-nosara/'
+                },
+                { 
+                    src: 'https://i.imgur.com/2wnegbj.png', 
+                    alt: 'Restaurante La Luna',
+                    title: 'Restaurante La Luna',
+                    description: 'This is a luxurious oceanfront restaurant in Costa Rica, popular with families for enjoying meals on the beach. At the edge of the Pacific with the most unforgettable sunset experience and Mediterranean Cuisine.  ',
+                    link: 'https://lalunanosara.com/'
+                },
+                { 
+                    src: 'https://i.imgur.com/N1eaHMz.png', 
+                    alt: 'Coyol Nosara',
+                    title: 'Coyol Nosara',
+                    description: 'Coyol is an incredible top-of-the-mountain restaurant. The adventurous drive, coupled with the breathtaking sunset views, sets the stage for a unique dining experience. Wood-fired smoked pork ribs are a MUST! ',
+                    link: 'https://coyolnosara.com/' 
+                },
+                { 
+                    src: 'https://i.imgur.com/7FnZW58.jpeg', 
+                    alt: 'Huacas Restaurant',
+                    title: 'Huacas Restaurant',
+                    description: 'Gastronomy & Mixology at Tierra Magnifica, Top of the mountain, breathtaking views.',
+                    link: 'https://www.huacasrest.com/menu'
+                },
+                { 
+                    src: 'https://i.imgur.com/3r8oWOl.png', 
+                    alt: 'Super Nosara',
+                    title: 'Super Nosara',
+                    description: 'Food shopping at Super Nosara',
+                    link: 'https://www.instagram.com/explore/locations/1503993542995118/super-nosara/?hl=en'
+                },
+
             ];
+
             const natureImages = [
                 { src: 'https://i.imgur.com/tgWh2Jj.jpeg', alt: 'Nature around Casa Zaza' },
                 { src: 'https://i.imgur.com/u5dEBcW.jpeg', alt: 'Nature around Casa Zaza' },
