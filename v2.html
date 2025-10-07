@@ -126,7 +126,7 @@
         <section id="about" class="text-center my-16">
             <h2 class="text-4xl md:text-5xl font-bold mb-6">An Unforgettable Costa Rican Escape</h2>
             <p class="max-w-4xl mx-auto text-lg text-gray-400 leading-relaxed mb-12">
-                Welcome to Casa Zaza, your tropical gated multi-family retreat! With 4 bedrooms in the main house and 2 additional independent fully equipped studio suites, our villa comfortably accommodates up to 12 guests. Enjoy the amazing 10-meter saltwater lap pool, lush gardens, and easy access to the beach via the famous Monkey Trail.
+                Welcome to Casa Zaza, your tropical gated multi-family retreat! With 4 bedrooms in the main house and 2 additional independent fully equipped studio suites, our villa comfortably accommodates up to 12 guests. Enjoy the amazing 10-meter saltwater lap pool, lush gardens, and easy access to the beach via the famous Monkey Trail. It's the ideal sanctuary for families, friends, or anyone seeking a peaceful yet adventurous escape.
             </p>
 
             <!-- NEW: "About the Space" Cards -->
@@ -178,10 +178,10 @@
                     <h3 class="text-2xl font-bold text-gold mb-3">Climate Control</h3>
                     <p class="text-gray-400">Don't worry about the weather, its always perfect inside.</p>
                 </div>
-                 <div class="p-6 md:col-span-3 text-center">
+                 <!-- <div class="p-6 md:col-span-3 text-center">
                     <h3 class="text-2xl font-bold text-gold mb-3">And Much More...</h3>
                     <p class="text-gray-400 max-w-2xl mx-auto">Outdoor rancho kitchen, outdoor shower, heated bidet seats, dual laundry, safety deposit boxes, three baby cribs, garage parking, and a backup generator for uninterrupted comfort.</p>
-                </div>
+                </div> -->
             </div>
         </section>
 
@@ -245,29 +245,41 @@
 
         <!-- Contact/Booking Section -->
         <section id="contact" class="text-center my-24 py-16 bg-gray-800 rounded-lg">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Reserve Your Stay</h2>
-            <!-- NEW: Improved Rates Layout -->
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Inquire About Your Stay</h2>
+             <p class="max-w-2xl mx-auto text-lg text-gray-400 mb-8 px-6">
+                We would love to host you. Please reach out to check availability or ask any questions.
+            </p>
+
             <div class="max-w-3xl mx-auto text-lg text-gray-400 mb-8 px-6">
                 <h4 class="text-2xl font-bold text-gold mb-6">Seasonal Rates</h4>
                 <div class="flex flex-col md:flex-row justify-center items-center gap-8">
                     <div class="border border-gray-600 p-6 rounded-lg w-full md:w-1/2">
                         <h5 class="text-xl font-semibold text-white">Standard Season</h5>
-                        <p class="text-3xl font-bold my-2 text-gold">$155</p>
-                        <p>/per bedroom /night</p>
-                        <p class="text-sm mt-2">($6550/week for the compound)</p>
+                        <p class="text-3xl font-bold my-2 text-gold">$155</p><p>/per bedroom /night</p><p class="text-sm mt-2">($6550/week for the compound)</p>
                     </div>
                     <div class="border border-gray-600 p-6 rounded-lg w-full md:w-1/2">
                         <h5 class="text-xl font-semibold text-white">Holiday Season</h5>
-                        <p class="text-3xl font-bold my-2 text-gold">$216</p>
-                         <p>/per bedroom /night</p>
-                        <p class="text-sm mt-2">($9100/week for the compound)</p>
+                        <p class="text-3xl font-bold my-2 text-gold">$216</p><p>/per bedroom /night</p><p class="text-sm mt-2">($9100/week for the compound)</p>
                     </div>
                 </div>
                 <p class="text-sm mt-6">Long term rentals available upon request. Please inquire for pricing.</p>
+                <p class="text-sm mt-4 text-gray-500">Please note: a refundable security deposit of $2000 is required for all stays.</p>
             </div>
-            <a href="mailto:zaza.jackman@gmail.com" class="bg-gold text-gray-900 font-bold py-4 px-10 rounded-lg text-lg hover:bg-yellow-600 transition-colors duration-300 transform hover:scale-105 inline-block">
-                Inquire for Availability
-            </a>
+            
+            <!-- NEW: Reliable Contact Method -->
+            <div class="mt-12">
+                <p class="text-gray-400 mb-4">Click to email or copy the address below:</p>
+                <div class="inline-flex items-center bg-gray-900 rounded-lg p-2 space-x-4">
+                    <a id="email-link" href="mailto:zaza.jackman@gmail.com?subject=Inquiry%20about%20Casa%20Zaza%20Nosara" class="text-gold text-lg font-semibold hover:underline">
+                        zaza.jackman@gmail.com
+                    </a>
+                    <button id="copy-email-btn" class="bg-gold text-gray-900 font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors duration-300 flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        <span id="copy-btn-text">Copy</span>
+                    </button>
+                </div>
+                <p id="copy-success-msg" class="text-green-400 mt-4 hidden">Email address copied to clipboard!</p>
+            </div>
         </section>
 
         <!-- Guest Information Section -->
@@ -465,6 +477,13 @@
                     link: 'https://www.naturetoursgabriela.com/433581537'
                 },
                 { 
+                    src: 'https://i.imgur.com/qdOcsLt.jpeg', 
+                    alt: 'Emanual Massage Therapist',
+                    title: 'Emanual Massage Therapist',
+                    description: 'Premium in-home bodywork, grounded not only in technique, but also in deep listening, intuition, and presence.',
+                    link: 'https://emanuelmassagetherapist.com/'
+                },
+                { 
                     src: 'https://i.imgur.com/YljoK7r.jpeg', 
                     alt: '506 Tennis Center',
                     title: '506 Tennis Center',
@@ -588,6 +607,7 @@
                 { src: 'https://i.imgur.com/p7MXXWi.jpeg', alt: 'Nature around Casa Zaza' },
                 { src: 'https://i.imgur.com/J4pDnli.jpeg', alt: 'Nature around Casa Zaza' }
             ];
+
 
             function populateGallery(galleryElement, images) {
                 if (!galleryElement) return;
